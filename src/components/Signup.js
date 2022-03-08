@@ -18,17 +18,20 @@ export default function Signup() {
         if (passwordRef.current.value !== passwordConfirmRef.current.value) {
             return setError('Passwords do not match')
         }
-
         try { 
             setError("") 
             setLoading(true)
+            console.log("error: ", error)
+            console.log("loading: ", loading)
             await signup(emailRef.current.value, passwordRef.current.value) 
+            console.log(emailRef.current.value, passwordRef.current.value)
             navigate("/")
         }   catch {
             setError('Failed to create an account')
         }
 
         setLoading(false)
+        console.log("second loading: ", loading)
     }
 
   return (  
@@ -50,6 +53,7 @@ export default function Signup() {
                         <Form.Label>Password Confirmation</Form.Label>
                         <Form.Control type="password" ref={passwordConfirmRef} required />
                     </Form.Group>
+                    <br/>
                     <Button disabled={loading} className="w-100" type="submit">Sign Up</Button>
                 </Form>
             </Card.Body>
